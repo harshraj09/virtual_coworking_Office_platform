@@ -1,8 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Dashboard:React.FC = () => {
   return (
-    <div>Dashboard</div>
+    <div>
+      <button><Link to="/login">Login</Link></button>
+    </div>
   )
 }
 
