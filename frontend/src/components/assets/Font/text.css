@@ -1,0 +1,22 @@
+.heading{       
+    font-family: "Roboto", "sans-serif";
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    display: inline;
+}
+
+.subheading{
+    font-family: "Roboto", "sans-serif";
+    color: white;
+    font-weight: 400;
+    display: inline; 
+}
+
+.body{
+    font-family: "Roboto", "sans-serif";
+    color: white;
+    font-weight: 400;
+    opacity: 0.5;
+    display: inline;
+}

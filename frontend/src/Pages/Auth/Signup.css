@@ -1,0 +1,29 @@
+.signup-container {
+    background-color: #2C3E50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-inner{
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.already-have-account{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

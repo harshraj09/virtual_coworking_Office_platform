@@ -1,0 +1,40 @@
+.primary{
+    background-color: #2C3E50;
+    color: white;
+    padding: 10px;
+    border-radius: 10px; 
+    border: 2px solid #E74C3C;
+    box-shadow:  3px 3px #E74C3C;
+    cursor: pointer;
+}
+
+.primary:hover{
+    background-color: #34495E;
+    color: white;
+}
+
+.primary:active{
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+.secondary{
+    background-color: #E74C3C;
+    color: white;
+    padding: 10px;
+    border-radius: 10px; 
+    border: 2px solid white;
+    box-shadow:  3px 3px white;
+    cursor: pointer;
+}
+
+.secondary:hover{
+    background-color: #ea6759;
+    color: white;
+}
+
+.secondary:active{
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
