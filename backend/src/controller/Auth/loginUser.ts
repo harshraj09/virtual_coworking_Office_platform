@@ -19,17 +19,27 @@ const loginUser = async (req: Request, res: Response): Promise<any> => {
             return res.json({ success: false, message: "Invalid password" });
         }
 
-        const token = jwt.sign({ _id: user._id,
+        const token = jwt.sign({
+            _id: user._id,
             name: user.name,
-            email: user.email }, process.env.JWT_SECRET as string);
-
+            email: user.email,
+        }, process.env.JWT_SECRET as string);
         return res.json({
             success: true,
             message: "Login successful",
-            data: { token, user: { _id: user._id, name: user.name, email: user.email } }
+            data: {
+                token, 
+                user: {
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    avatar: user.avatar,
+                    position: user.postion
+                }
+            }
         });
     } catch (err) {
-        return res.json({ success: false, message: "Internal server error" });
+        return res.json({ success: false, message: "Internal server error", error: (err as Error).message });
     }
 };
 

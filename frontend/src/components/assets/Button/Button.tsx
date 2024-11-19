@@ -10,7 +10,7 @@ interface ButtonProps {
     style?: React.CSSProperties;
 }
 
-const Button:React.FC<ButtonProps> = ({ children, variant='primary', onClick, width='100px', height='40px', style }) => {
+const Button:React.FC<ButtonProps> = ({ children, variant='primary', onClick, width='fit-content', height='40px', style }) => {
   return (
     <button
     onClick={onClick}

@@ -8,13 +8,14 @@ interface TextProps {
     color?: string;
     variant?: "heading" | "subheading" | "body";
     style?: React.CSSProperties;
+    className? : string
 }
 
-const Text: React.FC<TextProps> = ({ children, variant = 'heading', style }) => {
+const Text: React.FC<TextProps> = ({ children, variant = 'heading', style, className=""}) => {
     return (
         <>
             <p
-                className={variant} style={style}>{children}
+                className={`${variant} ${className}`} style={style}>{children}
             </p>
         </>
 

@@ -5,18 +5,16 @@ import Text from '../../components/assets/Font/Text'
 import TextInput from '../../components/assets/TextInput/TextInput'
 import Button from '../../components/assets/Button/Button'
 import { Link, useNavigate } from 'react-router-dom'
-import { apiContext, setAuthHeader } from '../../utils/apiContext'
 import { showToast } from '../../components/Toast/Toast'
 import Loading from '../../components/Loading/Loading'
+import APIService from '../../service/APIService.ts/APIService'
+
 
 interface IFormData {
     name: string;
     email: string;
     password: string;
 }
-
-
-
 const Signup: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [formData, setFormData] = useState<IFormData>({
@@ -32,13 +30,19 @@ const Signup: React.FC = () => {
 
     const handleSubmit = async () => {
         setLoading(true);
-        const response = await apiContext.post('/api/signup', formData);
-        console.log(response);
+        const response = await APIService.postRequest({
+            url : "/api/signup",
+            data : formData,
+            secure : false,
+        });
         if (response.data.success) {
-            showToast(response.data.message, 'success', 3000);
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            setAuthHeader(response.data.token);
+            showToast(response.data.message, 'success', 3000);   
+            if (response.data.data.token) {
+                APIService.setItem("token", response.data.data.token);
+            }
+            if (response.data.data.user) {
+                APIService.setItem("user", response.data.data.user);
+            }
             navigate('/');
         } else {
             showToast(response.data.message, 'error', 3000);

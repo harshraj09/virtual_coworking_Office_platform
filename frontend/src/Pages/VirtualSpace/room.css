@@ -1,0 +1,35 @@
+.main-section{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section1 {
+    width: 70%;
+    height: 100vh;
+    background-color: green;
+}
+
+.section2 {
+    width: 30%;
+    height: 100vh;
+    background-color: red;
+    display:flex;
+    align-items: start;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.joined-users {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.my-cam {
+    width: 180px;
+    height: 150px;
+    background-color: aqua;
+}

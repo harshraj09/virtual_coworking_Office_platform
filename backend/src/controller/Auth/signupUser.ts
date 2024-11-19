@@ -25,7 +25,6 @@ const signupUser = async (req: Request, res: Response): Promise<any> => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            avatar: user.avatar
         }, process.env.JWT_SECRET as string);
 
         return res.json({
@@ -37,7 +36,8 @@ const signupUser = async (req: Request, res: Response): Promise<any> => {
                     _id: user._id,
                     name: user.name,
                     email: user.email,
-                    avatar: user.avatar
+                    avatar: user.avatar,
+                    position : user.postion
                 }
             }
         });

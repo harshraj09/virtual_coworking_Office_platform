@@ -29,17 +29,28 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!isPasswordMatch) {
             return res.json({ success: false, message: "Invalid password" });
         }
-        const token = jsonwebtoken_1.default.sign({ _id: user._id,
+        const token = jsonwebtoken_1.default.sign({
+            _id: user._id,
             name: user.name,
-            email: user.email }, process.env.JWT_SECRET);
+            email: user.email,
+        }, process.env.JWT_SECRET);
         return res.json({
             success: true,
             message: "Login successful",
-            data: { token, user: { _id: user._id, name: user.name, email: user.email } }
+            data: {
+                token,
+                user: {
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    avatar: user.avatar,
+                    position: user.postion
+                }
+            }
         });
     }
     catch (err) {
-        return res.json({ success: false, message: "Internal server error" });
+        return res.json({ success: false, message: "Internal server error", error: err.message });
     }
 });
 exports.default = loginUser;

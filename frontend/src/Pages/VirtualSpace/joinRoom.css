@@ -1,0 +1,76 @@
+.join-room {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.join-room-setup{
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.cam-win{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.cam-setup{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.cam-controller {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.join-btn{
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: blue;
+    font-weight: bold;
+    color: white;
+    border: 1px solid white;
+}
+
+.cam-setup input[type="text"] {
+    width: 100%;
+    height: 30px;
+    padding: 0 10px;
+}
+
+.join-btn:hover {
+    color: white;
+    background-color: rgb(43, 43, 252);
+    font-weight: bold;
+}
+
+
+.join-btn:active{
+    background-color: rgb(128, 128, 255);
+    color: white;
+    font-weight: bold;
+}

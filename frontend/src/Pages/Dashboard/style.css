@@ -1,0 +1,17 @@
+.dashboard {
+    height: 100vh;
+    width: 100vw;
+    background-color: #2C3E50;
+}
+
+.show-space{
+    margin: 20px;
+    color: skyblue;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px 0;
+}
+
+.space-text{
+    padding: 10px;
+}

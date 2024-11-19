@@ -9,6 +9,16 @@ const userSchema = new mongoose_1.default.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     avatar: { type: String },
+    postion: {
+        x: {
+            type: Number,
+            default: Math.floor((Math.random() * 51) + 50)
+        },
+        y: {
+            type: Number,
+            default: Math.floor((Math.random() * 51) + 50)
+        }
+    }
 }, { timestamps: true });
 const User = mongoose_1.default.model("User", userSchema);
 exports.default = User;

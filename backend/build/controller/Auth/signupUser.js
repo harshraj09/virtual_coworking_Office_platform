@@ -34,7 +34,6 @@ const signupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             _id: user._id,
             name: user.name,
             email: user.email,
-            avatar: user.avatar
         }, process.env.JWT_SECRET);
         return res.json({
             success: true,
@@ -45,7 +44,8 @@ const signupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                     _id: user._id,
                     name: user.name,
                     email: user.email,
-                    avatar: user.avatar
+                    avatar: user.avatar,
+                    position: user.postion
                 }
             }
         });
