@@ -4,18 +4,21 @@ import connectDB from "./config/db";
 import dotenv from "dotenv";
 import WorkSpace from "./routes/WorkSpace";
 import cors from "cors";
-import { Server } from 'socket.io';
+import { Server } from "socket.io";
+import { createServer } from "http";
+import User from "./model/User";
 
 dotenv.config();
 
 const app = express();
-const server = require('http').createServer(app); // Create an HTTP server using Express
+const server = createServer(app);
+
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
     origin: "*",
-    methods: ["GET", "POST"]
-  }
+    methods: ["GET", "POST"],
+  },
 });
 
 connectDB();
@@ -27,22 +30,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", authRoutes);
 app.use("/api", WorkSpace);
 
-// Socket.IO connectio
+
+
+const spaces = new Map;
+
 io.on("connection", (socket) => {
-  let spaceRoom: string;
-  // socket?.emit("joining:request" , {spaceId, members : responce.data.data.space.members})
-  socket.on("joining:request", ({ spaceId, members }) => {
+  socket.on("joining:request", data =>{
+    const {spaceId, members} = data;
     socket.join(spaceId);
-    console.log({spaceId});
-    io.to(spaceId).emit("join-user", { members });
-  });
-
-  socket.on("move", data => {
-    io.to(data.spaceId).emit("user:move", data);
+    spaces.set(spaceId, members);
+    console.log("Data From Client : ", {spaceId, members});
+    console.log("This is spaces : ", spaces);
+    const spaceData = spaces.get(spaceId);
+    io.in(spaceId).emit("new_user_join", spaceData);
   })
+  
+});
 
-})
-// Start the server on port 8000
 server.listen(8000, () => {
   console.log("Server is running on port 8000");
 });

@@ -5,7 +5,7 @@ interface IUser extends mongoose.Document {
   email: string;
   password: string;
   avatar: string;
-  postion: { x: number, y: number }
+  position: { x: number, y: number }
 }
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema<IUser>({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   avatar: { type: String },
-  postion: {
+  position: {
     x: {
       type: Number,
       default: Math.floor((Math.random() * 51) + 50)

@@ -9,7 +9,7 @@ const userSchema = new mongoose_1.default.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     avatar: { type: String },
-    postion: {
+    position: {
         x: {
             type: Number,
             default: Math.floor((Math.random() * 51) + 50)

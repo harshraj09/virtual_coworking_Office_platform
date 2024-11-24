@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import axios, {  AxiosInstance, AxiosResponse } from "axios";
 import { APIParameters, AuthToken } from "../../types/API/ApiParames";
 class APIService {
     private static authToken: AuthToken | undefined;
@@ -25,7 +25,7 @@ class APIService {
         localStorage.setItem(key, JSON.stringify(value));
     }
 
-    public static getItem(key: string): string | null {
+    public static getItem(key: string): any | null {
         const data = JSON.parse(localStorage.getItem(key) as string);
         return data;
     }
@@ -51,6 +51,7 @@ class APIService {
         }
         responce = await this.axiosInstance.post(url, data);
         return responce;
+
     }
 
     public static async putRequest(parameters: APIParameters): Promise<AxiosResponse<any>> {

@@ -31,6 +31,7 @@ const VirtualSpace: React.FC = () => {
   const {spaceId} = useParams<{spaceId : string}>();
   const navigate = useNavigate();
   const { socket } = useSocket() || { socket: null };
+
   const handelBasciConfig = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: true,

@@ -1,141 +1,109 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useSocket } from '../../context/SocketContext/SocketContext';
-import APIService from '../../service/APIService.ts/APIService';
-import { useParams } from 'react-router-dom';
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import APIService from "../../service/APIService.ts/APIService";
+import { useSocket } from "../../context/SocketContext/SocketContext";
 
 const CANVAS_WIDTH = 1000;
 const CANVAS_HEIGHT = 600;
 
-interface IMyCharacter {
-    name: string,
-    postion: { x: number, y: number },
-    color?: string
+
+interface Position {
+    _id?: string;
+    avatar?: string;
+    position: {
+        x: number;
+        y: number;
+    };
 }
-
-const useCanvas = (character : any, drawCallBack : any) => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-
-    useEffect(()=>{
-        const ctx = canvasRef.current?.getContext("2d");
-
-        if(!ctx) return;
-
-        const render = () => {
-            drawCallBack(ctx);
-            requestAnimationFrame(render);
-        }
-        render();
-        return () => cancelAnimationFrame(requestAnimationFrame(render));
-    }, [character, drawCallBack])  
-}
-
-
 const Game: React.FC = () => {
-
-    const { socket } = useSocket() || { socket: null };
+    const [user , setUser] = useState( APIService.getItem("user"));
+    const {socket} = useSocket() || {socket : null};
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [characters, setCharacters] = useState<IMyCharacter[]>([]);
-    const { spaceId } = useParams<{ spaceId: string }>()
-    const draw = useCallback((ctx: CanvasRenderingContext2D) => {
-        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        characters.forEach(character => {
-            ctx.fillStyle = "red";
-            ctx.fillRect(character.postion.x, character.postion.y, 20, 20);
-            ctx.fillStyle = "black";
-            ctx.font = "12px Arial";
-            ctx.textAlign = "left";
-            ctx.textBaseline = "top";
-            ctx.fillText(character.name, character.postion.x - 10, character.postion.y - 10);
-        });
-    }, [characters]);
-    // const canvasRef = useCanvas(characters, draw);
+    const animationFrameId = useRef<number | null>(null);
+    const [position, setPosition] = useState<Position>({
+        avatar : user.avatar,
+        position: user.position,
+        _id : user._id
+    });
+
+    const [members, setMembers] = useState<Position[]>([
+        {
+            avatar: "Pranjali",
+            position: { x: 200, y: 150 },
+        },
+    ]);
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
-        const localUser = APIService.getItem("user") as { name: string } | null;
-        setCharacters((prev) => {
-            return prev.map(character => {
-                if (!localUser || character.name !== localUser.name) return character;
-                let newPosition = { ...character.postion };
-                switch (e.key) {
-                    case "w":
-                        newPosition.y -= 5;
-                        break;
-                    case "s":
-                        newPosition.y += 5;
-                        break;
-                    case "a":
-                        newPosition.x -= 5;
-                        break;
-                    case "d":
-                        newPosition.x += 5;
-                        break;
-                    default:
-                        return character;
-                }
-                socket?.emit("move", { ...character, postion: newPosition, spaceId });
-                return { ...character, postion: newPosition };
-            });
-        });
+        const movements: { [key: string]: { x: number; y: number } } = {
+            w: { x: 0, y: -4 },
+            a: { x: -4, y: 0 },
+            s: { x: 0, y: +4 },
+            d: { x: 4, y: 0 },
+        };
+
+        const movement = movements[e.key];
+        if (movement) {
+            setPosition((prev) => ({
+                ...prev,
+                position: {
+                    x: Math.max(0, Math.min(CANVAS_WIDTH - 20, prev.position.x + movement.x)),
+                    y: Math.max(0, Math.min(CANVAS_HEIGHT - 20, prev.position.y + movement.y)),
+                },
+            }));
+        }
     }, []);
 
-    const handelAllUserJoin = useCallback((data: any) => {
-        // Update the characters state with the new members
-        const { members } = data;
-        console.log("Joining User");
-        members.forEach((element: any) => {
-            console.log({ element });
-            setCharacters((prev) => [
-                ...prev, element
-            ]);
+    const drawPlayer = useCallback((ctx: CanvasRenderingContext2D) => {
+        ctx.fillStyle = "red";
+        ctx.fillRect(position.position.x, position.position.y, 20, 20);
+    }, [position]);
+
+    const drawMembers = useCallback((ctx: CanvasRenderingContext2D) => {
+        ctx.fillStyle = "blue";
+        members.forEach((member) => {
+            ctx.fillRect(member.position.x, member.position.y, 20, 20);
         });
-        console.log("User Joined");
-    }, [characters])
+    }, [members]);
 
-    const handelUserMove = useCallback((data: any) => {
-        console.log({ data });
-        setCharacters((prev) => {
-            return prev.map((character) => {
-                if (character.name !== data.name) return character;
-                return { ...character, postion: data.postion };
-            });
-        });
-    }, [characters])
-
-    useEffect(() => {
-        socket?.emit("IneedUserArray", "I need User Array");
-    }, [])
-
-    useEffect(() => {
-        socket?.on("join-user", handelAllUserJoin);
-        socket?.on("user:move", handelUserMove);
-        return (() => {
-            socket?.off("join-user", handelAllUserJoin);
-            socket?.off("user:move", handelUserMove);
-        })
-    }, [socket, handelAllUserJoin, handelUserMove]);
-
-    useEffect(() => {
+    const render = useCallback(() => {
         const ctx = canvasRef.current?.getContext("2d");
         if (!ctx) return;
 
-        const render = () => {
-            draw(ctx);
-            requestAnimationFrame(render);
-        };
+        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        drawMembers(ctx);
+        drawPlayer(ctx);
 
+        animationFrameId.current = requestAnimationFrame(render);
+    }, [drawMembers, drawPlayer]);
+
+    useEffect(()=>{
+        socket?.emit("new_user_join", (data : any)=>{
+            console.log({data});
+        })
+    }, [socket])
+
+    useEffect(() => {
         window.addEventListener("keydown", handleKeyDown);
-        render();
+
+        animationFrameId.current = requestAnimationFrame(render);
 
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
+            if (animationFrameId.current) {
+                cancelAnimationFrame(animationFrameId.current);
+            }
         };
-    }, [draw, handleKeyDown]);
+    }, [handleKeyDown, render]);
 
     return (
-        <>
-            <canvas style={{ backgroundColor: "skyblue" }} ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT}></canvas>
-        </>
-    )
-}
+        <div className="virtual-space">
+            <canvas
+                style={{ backgroundColor: "skyblue" }}
+                ref={canvasRef}
+                width={CANVAS_WIDTH}
+                height={CANVAS_HEIGHT}
+            ></canvas>
+        </div>
+    );
+};
 
-export default Game
+export default Game;

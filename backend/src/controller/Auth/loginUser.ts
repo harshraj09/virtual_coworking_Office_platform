@@ -16,7 +16,7 @@ const loginUser = async (req: Request, res: Response): Promise<any> => {
 
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
-            return res.json({ success: false, message: "Invalid password" });
+            return res.status(401).json({ success: false, message: "Invalid password" });
         }
 
         const token = jwt.sign({
@@ -34,7 +34,7 @@ const loginUser = async (req: Request, res: Response): Promise<any> => {
                     name: user.name,
                     email: user.email,
                     avatar: user.avatar,
-                    position: user.postion
+                    position: user.position
                 }
             }
         });

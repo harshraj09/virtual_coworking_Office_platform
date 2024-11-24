@@ -35,6 +35,7 @@ const Signup: React.FC = () => {
             data : formData,
             secure : false,
         });
+        console.log(response);
         if (response.data.success) {
             showToast(response.data.message, 'success', 3000);   
             if (response.data.data.token) {

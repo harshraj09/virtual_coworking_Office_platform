@@ -37,7 +37,7 @@ const signupUser = async (req: Request, res: Response): Promise<any> => {
                     name: user.name,
                     email: user.email,
                     avatar: user.avatar,
-                    position : user.postion
+                    position : user.position
                 }
             }
         });

@@ -27,7 +27,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const isPasswordMatch = yield bcrypt_1.default.compare(password, user.password);
         if (!isPasswordMatch) {
-            return res.json({ success: false, message: "Invalid password" });
+            return res.status(401).json({ success: false, message: "Invalid password" });
         }
         const token = jsonwebtoken_1.default.sign({
             _id: user._id,
@@ -44,7 +44,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     name: user.name,
                     email: user.email,
                     avatar: user.avatar,
-                    position: user.postion
+                    position: user.position
                 }
             }
         });

@@ -45,7 +45,7 @@ const signupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                     name: user.name,
                     email: user.email,
                     avatar: user.avatar,
-                    position: user.postion
+                    position: user.position
                 }
             }
         });
