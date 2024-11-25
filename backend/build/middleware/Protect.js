@@ -32,14 +32,23 @@ const protect = (0, express_async_handler_1.default)((req, res, next) => __await
             message: "Page Not Found",
         });
     }
-    const decodeData = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-    const user = yield User_1.default.findOne({ _id: decodeData._id });
-    if (!user) {
-        return res.status(404).json({
+    try {
+        const decodeData = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        const user = yield User_1.default.findOne({ _id: decodeData === null || decodeData === void 0 ? void 0 : decodeData._id });
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "Page Not Found",
+            });
+        }
+        return next();
+    }
+    catch (err) {
+        console.log(err.message);
+        return res.status(500).json({
             success: false,
-            message: "Page Not Found",
+            message: "Server Error"
         });
     }
-    return next();
 }));
 exports.default = protect;

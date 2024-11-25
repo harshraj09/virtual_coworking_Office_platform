@@ -17,7 +17,6 @@ const express_async_handler_1 = __importDefault(require("express-async-handler")
 const WorkingSpace_1 = __importDefault(require("../../model/WorkingSpace"));
 const enterToSpace = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { spaceId, userId } = req.body;
-    console.log({ userId, spaceId });
     if (!spaceId || !userId) {
         return res.json({
             success: false,

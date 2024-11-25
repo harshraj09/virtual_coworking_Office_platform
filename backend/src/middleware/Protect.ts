@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt, { decode, JwtPayload } from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
 import User from "../model/User";
 
@@ -19,16 +19,23 @@ const protect = asyncHandler(async (req: Request, res: Response, next: NextFunct
             message: "Page Not Found",
         })
     }
-
-    const decodeData = jwt.verify(token as string, process.env.JWT_SECRET as jwt.Secret) as JwtPayload;
-    const user = await User.findOne({ _id: decodeData._id });
-    if (!user) {
-        return res.status(404).json({
-            success: false,
-            message: "Page Not Found",
+    try{
+        const decodeData = jwt.verify(token as string, process.env.JWT_SECRET as jwt.Secret) as JwtPayload;
+        const user = await User.findOne({ _id: decodeData?._id });
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "Page Not Found",
+            })
+        }
+        return next();
+    }catch(err){
+        console.log((err as Error).message);
+        return res.status(500).json({
+            success : false,
+            message : "Server Error"
         })
     }
-    return next();
 })
 
 

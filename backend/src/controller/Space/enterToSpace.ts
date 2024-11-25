@@ -4,9 +4,6 @@ import WorkingSpace from "../../model/WorkingSpace";
 
 const enterToSpace = expressAsyncHandler(async(req : Request, res : Response):Promise<any> => {
     const {spaceId, userId} : {spaceId : string, userId : string} = req.body;
-
-    console.log({userId, spaceId});
-    
     if(!spaceId || !userId) {
         return res.json({
             success : false,

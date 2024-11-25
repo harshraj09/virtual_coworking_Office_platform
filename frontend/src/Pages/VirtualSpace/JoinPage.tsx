@@ -52,16 +52,8 @@ const VirtualSpace: React.FC = () => {
   }, []);
 
   const handelJoinUser = async () => {
-    const responce = await APIService.putRequest({
-      url : "/api/joinspace", 
-      data : {
-      spaceId : spaceId, userId: (localUser?._id as string)
-      }, 
-      secure : true
-    });
-    if (responce.data.success) {
-      const members : MembersType[] = responce.data.data.space.members
-      socket?.emit("joining:request" , {spaceId, members});
+    if (true) {
+      socket?.emit("join-space", { spaceId, user: localUser });
       navigate(`/space/${spaceId}/room`);
     }
   }
