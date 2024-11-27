@@ -3,7 +3,11 @@ import { APIParameters, AuthToken } from "../../types/API/ApiParames";
 class APIService {
     private static authToken: AuthToken | undefined;
     public static axiosInstance: AxiosInstance;
+<<<<<<< HEAD
     private static baseUrl: string = "https://virtual-office.onrender.com/";
+=======
+    private static baseUrl: string = "https://virtual-office.onrender.com";
+>>>>>>> a4daf3279f45b829d638d821fab565fa5a94be20
     private static token: string | undefined;
 
     static {
