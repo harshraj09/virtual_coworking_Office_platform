@@ -4,8 +4,8 @@
   "description": "This is the basic backend of our virtual office.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon build/index.js",
-    "dev": "tsc-watch --onSuccess \"yarn start\""
+    "start": "node build/index.js",
+    "dev": "tsc -b"
   },
   "author": "",
   "license": "ISC",
