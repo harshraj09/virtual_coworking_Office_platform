@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const apiContext = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://virtual-office.onrender.com',
     headers: {
         'Content-Type': 'application/json'
     }
