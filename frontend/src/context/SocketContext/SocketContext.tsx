@@ -11,7 +11,7 @@ export const useSocket = () => {
 }
 
 export const SocketProvider:React.FC<InSocket> = (props) => {
-    const socket = useMemo(() => io("http://localhost:8000"), [])
+    const socket = useMemo(() => io("https://virtual-office.onrender.com/"), [])
     
     return (
         <SocketContext.Provider value={{socket}}>
