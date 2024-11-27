@@ -18,6 +18,7 @@ class SocketInstance {
             })
 
             socket.on("user:move", ({user, spaceId})=>{
+                console.log(user);
                 this.io.to(spaceId).emit("user:moved" , {user});
             });
             

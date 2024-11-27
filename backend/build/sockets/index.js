@@ -26,6 +26,7 @@ class SocketInstance {
                 this.io.to(spaceId).emit("join:success", { users: newUser === null || newUser === void 0 ? void 0 : newUser.members });
             }));
             socket.on("user:move", ({ user, spaceId }) => {
+                console.log(user);
                 this.io.to(spaceId).emit("user:moved", { user });
             });
             socket.on("user-disconnect", (_a) => __awaiter(this, [_a], void 0, function* ({ spaceId, userId }) {

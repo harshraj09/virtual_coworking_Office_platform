@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import APIService from "../../service/APIService.ts/APIService";
 import { useSocket } from "../../context/SocketContext/SocketContext";
 import { useParams } from "react-router-dom";
+import Character from "./Character";
+import characterImage from '../../images/image01.png'
 
 interface User {
     _id: number;
@@ -9,18 +11,16 @@ interface User {
     position: {
         x: number;
         y: number;
-    }
+    };
+    walkFrame: number;
+    direction: number;
 }
 
 const Game: React.FC = () => {
     const user = APIService.getItem("user");
     const { socket } = useSocket() || { socket: null };
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const [users, setUsers] = useState<User[]>([
-        // { _id: 1, name: "Ashutosh", position: { x: 50, y: 50 } },
-        // { _id: 2, name: "John", position: { x: 150, y: 150 } },
-        // { _id: 3, name: "Jane", position: { x: 250, y: 250 } },
-    ]);
+    const [users, setUsers] = useState<User[]>([]);
     const { spaceId } = useParams<{ spaceId: string }>();
 
     const userToControl = user._id;
@@ -29,47 +29,59 @@ const Game: React.FC = () => {
         setUsers((prevUsers) =>
             prevUsers.map((user) => {
                 if (user._id === userToControl) {
+                    // Increment walkFrame for the controlled user
+                    let newWalkFrame;
+                    user.direction != 1 ? (newWalkFrame = user.walkFrame < 10 ? user.walkFrame + 1 : 0 ) : (newWalkFrame = user.walkFrame > 0 ? user.walkFrame - 1 : 10 )
+    
                     switch (e.key) {
                         case "w":
+                            user.direction = 2;
                             user.position.y -= 10; // Move up
                             break;
                         case "s":
+                            user.direction = 3;
                             user.position.y += 10; // Move down
                             break;
                         case "a":
+                            user.direction = 1;
                             user.position.x -= 10; // Move left
                             break;
                         case "d":
+                            user.direction = 0;
                             user.position.x += 10; // Move right
                             break;
                         default:
-                            // Do nothing for other keys
                             break;
                     }
-                    socket?.emit("user:move", { user, spaceId });
-                    return user;
+    
+                    // Update walkFrame and send move event
+                    const updatedUser = { ...user, walkFrame: newWalkFrame };
+                    socket?.emit("user:move", { user : updatedUser, spaceId });
+                    return updatedUser;
                 }
+                
+                console.log({user});
                 return user;
             })
         );
     };
-
-
+    
     const drawUsers = (ctx: CanvasRenderingContext2D) => {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear canvas
         users.forEach((user) => {
+            const player = new Character(ctx, characterImage);
             // Draw a circle for the user
             ctx.beginPath();
-            ctx.arc(user.position.x, user.position.y, 20, 0, Math.PI * 2, true);
-            ctx.fillStyle = user._id === userToControl ? "blue" : "gray";
+            player.animate(user.position.x, user.position.y, user.walkFrame, user.direction);
+            // ctx.arc(user.position.x, user.position.y, 20, 0, Math.PI * 2, true);
+            // ctx.fillStyle = user._id === userToControl ? "blue" : "gray";
             ctx.fill();
             ctx.closePath();
-
             // Draw the user name above
             ctx.font = "16px Arial";
             ctx.fillStyle = "black";
             ctx.textAlign = "center";
-            ctx.fillText(user.name, user.position.x, user.position.y - 30);
+            ctx.fillText(user.name, user.position.x, user.position.y - 50);
         });
     };
 
@@ -81,7 +93,7 @@ const Game: React.FC = () => {
         ({ user }: { user: User }) => {
             setUsers((prevUsers) =>
                 prevUsers.map((elem) =>
-                    elem._id === user._id ? { ...elem, position: user.position } : elem 
+                    elem._id === user._id ? { ...elem, position: user.position, walkFrame: user.walkFrame, direction: user.direction } : elem
                 )
             );
         },
@@ -99,7 +111,7 @@ const Game: React.FC = () => {
         window.addEventListener("unload", () => {
             socket?.emit("user-disconnect", { spaceId, userId: user._id });
         })
-        
+
         return (() => {
             socket?.on("join:success", () => { });
             socket?.off("user:left", handelUserJoin);
@@ -115,29 +127,45 @@ const Game: React.FC = () => {
 
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
-
-        // Draw the users
         drawUsers(ctx);
 
-        // Add event listener for keyboard inputs
         window.addEventListener("keydown", handleKeyDown);
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
     }, [users]);
 
+
     return (
-        <canvas
-            ref={canvasRef}
-            width={1200}
-            height={1200}
-            style={{
-                border: "1px solid black",
-            }}
-        />
+        <>
+            <canvas
+                ref={canvasRef}
+                width={1200}
+                height={1200}
+                style={{
+                    border: "1px solid black",
+                }}
+            >
+            </canvas>
+        </>
     );
 
 };
 
 export default Game;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

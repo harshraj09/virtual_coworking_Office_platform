@@ -30,7 +30,7 @@ const Dashboard: React.FC = () => {
                 }
             })
             if (response.data.success) {
-                setLoading(false);
+                setLoading(true);
             } else {
                 navigate("/login");
             }
