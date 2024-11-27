@@ -5,11 +5,12 @@ import dotenv from "dotenv";
 import WorkSpace from "./routes/WorkSpace";
 import cors from "cors";
 import { createServer } from "http";
-import { Server, Socket } from 'socket.io'
+import { Server } from 'socket.io'
 import SocketInstance from "./sockets";
 
 dotenv.config();
 
+const port = process.env.PORT || 8080;
 const app = express();
 const server = createServer(app);
 
@@ -31,6 +32,6 @@ app.use("/api", WorkSpace);
 new SocketInstance(io);
 
 
-server.listen(8000, () => {
+server.listen(port as number, () => {
   console.log("Server is running on port 8000");
 });

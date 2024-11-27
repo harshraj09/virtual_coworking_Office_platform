@@ -13,6 +13,7 @@ const http_1 = require("http");
 const socket_io_1 = require("socket.io");
 const sockets_1 = __importDefault(require("./sockets"));
 dotenv_1.default.config();
+const port = process.env.PORT || 8080;
 const app = (0, express_1.default)();
 const server = (0, http_1.createServer)(app);
 (0, db_1.default)();
@@ -27,6 +28,6 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api", Auth_1.default);
 app.use("/api", WorkSpace_1.default);
 new sockets_1.default(io);
-server.listen(8000, () => {
+server.listen(port, () => {
     console.log("Server is running on port 8000");
 });
