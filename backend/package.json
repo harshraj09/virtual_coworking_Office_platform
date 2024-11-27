@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "tsc-watch --onSuccess \"yarn start\"",
-    build : "tsc -b"
+    "build" : "tsc -b"
   },
   "author": "",
   "license": "ISC",
