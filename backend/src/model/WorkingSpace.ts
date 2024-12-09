@@ -6,6 +6,7 @@ interface IWorkingSpace extends mongoose.Document {
     members: mongoose.Schema.Types.ObjectId[];
     admin: mongoose.Schema.Types.ObjectId;
     numberOfMembers: number;
+    chats : mongoose.Schema.Types.ObjectId[];
 }
 
 const workingSpaceSchema = new mongoose.Schema<IWorkingSpace>({
@@ -13,6 +14,7 @@ const workingSpaceSchema = new mongoose.Schema<IWorkingSpace>({
     members: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     admin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     numberOfMembers: { type: Number, default: 2 },
+    chats : [{type : mongoose.Schema.Types.ObjectId, ref : "Chat"}]
 }, { timestamps: true });
 
 const WorkingSpace = mongoose.model<IWorkingSpace>("WorkingSpace", workingSpaceSchema);

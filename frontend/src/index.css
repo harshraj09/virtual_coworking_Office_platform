@@ -7,8 +7,11 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.main{
+body{
     background-color: #2C3E50;
+}
+
+.main{
     width: 100vw;
     height: 100vh;
     display: flex;

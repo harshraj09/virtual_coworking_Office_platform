@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import UserJoin from "./UserJoin";
 import { ObjectId } from "mongoose";
+import User from "../model/User";
 
 class SocketInstance {
     private io: Server;
@@ -17,8 +18,11 @@ class SocketInstance {
                 this.io.to(spaceId).emit("join:success" ,{users : newUser?.members});
             })
 
-            socket.on("user:move", ({user, spaceId})=>{
-                this.io.to(spaceId).emit("user:moved" , {user});
+            socket.on("user:move",({user, spaceId})=>{
+                setTimeout(()=>{
+                    this.io.to(spaceId).emit("user:moved" , {user});
+                }, 30);
+                // this.updateUserPostion(user._id as string, user.position);
             });
             
             socket.on("user-disconnect", async({spaceId, userId}) => {
@@ -27,7 +31,17 @@ class SocketInstance {
             })
         })
     }
-
+    private async updateUserPostion (userId : string, position : any){
+        try{
+            await User.findByIdAndUpdate({
+                _id : userId
+            },{
+                $set : { position : position}
+            }, {new : true});
+        }catch(err){
+            console.log((err as Error).message);
+        }
+    }
 }
 
 export default SocketInstance;

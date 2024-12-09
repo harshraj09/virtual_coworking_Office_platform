@@ -7,6 +7,8 @@ import cors from "cors";
 import { createServer } from "http";
 import { Server } from 'socket.io'
 import SocketInstance from "./sockets";
+import VideoInstance from "./sockets/VideoCall";
+import ChatInstance from "./sockets/Chat";
 
 dotenv.config();
 
@@ -30,7 +32,8 @@ app.use("/api", authRoutes);
 app.use("/api", WorkSpace);
 
 new SocketInstance(io);
-
+new VideoInstance(io);
+new ChatInstance(io);
 
 server.listen(port as number, () => {
   console.log("Server is running on port 8000");

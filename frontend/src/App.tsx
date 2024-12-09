@@ -14,6 +14,7 @@ const App: React.FC = () => {
 
   return (
     <>
+    <div>
         <Router future={{ v7_startTransition: true }}>
           <SocketProvider>
             <Routes>
@@ -26,6 +27,7 @@ const App: React.FC = () => {
             </Routes>
           </SocketProvider>
         </Router>
+    </div>
     </>
   )
 }

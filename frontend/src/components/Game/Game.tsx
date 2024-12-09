@@ -4,6 +4,8 @@ import { useSocket } from "../../context/SocketContext/SocketContext";
 import { useParams } from "react-router-dom";
 import Character from "./Character";
 import characterImage from '../../images/image01.png'
+import { Background } from "./Background";
+import BackgroundImage from '../../images/background.png';
 
 interface User {
     _id: number;
@@ -32,10 +34,9 @@ const Game: React.FC = () => {
                     // Increment walkFrame for the controlled user
                     let newWalkFrame;
                     user.direction != 1 ? (newWalkFrame = user.walkFrame < 10 ? user.walkFrame + 1 : 0 ) : (newWalkFrame = user.walkFrame > 0 ? user.walkFrame - 1 : 10 )
-    
                     switch (e.key) {
                         case "w":
-                            user.direction = 2;
+                            user.direction = 2;     // Set Direction For Up Side
                             user.position.y -= 10; // Move up
                             break;
                         case "s":
@@ -53,7 +54,6 @@ const Game: React.FC = () => {
                         default:
                             break;
                     }
-    
                     // Update walkFrame and send move event
                     const updatedUser = { ...user, walkFrame: newWalkFrame };
                     socket?.emit("user:move", { user : updatedUser, spaceId });
@@ -67,7 +67,6 @@ const Game: React.FC = () => {
     };
     
     const drawUsers = (ctx: CanvasRenderingContext2D) => {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear canvas
         users.forEach((user) => {
             const player = new Character(ctx, characterImage);
             // Draw a circle for the user
@@ -88,18 +87,18 @@ const Game: React.FC = () => {
     const handelUserJoin = useCallback(({ users }: { users: User[] }) => {
         setUsers(users);
     }, [users]);
-
+    
     const handleUserMove = useCallback(
         ({ user }: { user: User }) => {
             setUsers((prevUsers) =>
                 prevUsers.map((elem) =>
                     elem._id === user._id ? { ...elem, position: user.position, walkFrame: user.walkFrame, direction: user.direction } : elem
-                )
-            );
-        },
+        )
+    );
+},
         [setUsers]
     );
-
+    
     useEffect(() => {
         socket?.emit("join:request", { userId: user._id, spaceId });
     }, [])
@@ -124,11 +123,15 @@ const Game: React.FC = () => {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-
+        
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
+        
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        
+        const bg = new Background(ctx, BackgroundImage);
+        bg.draw();
         drawUsers(ctx);
-
         window.addEventListener("keydown", handleKeyDown);
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
@@ -140,8 +143,8 @@ const Game: React.FC = () => {
         <>
             <canvas
                 ref={canvasRef}
-                width={1200}
-                height={1200}
+                width={1000}
+                height={620}
                 style={{
                     border: "1px solid black",
                 }}
