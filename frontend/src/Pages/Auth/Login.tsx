@@ -42,7 +42,7 @@ const Login: React.FC = () => {
             if (response.data.data.user) {
                 APIService.setItem('user', response.data.data.user);
             }
-            navigate('/');
+            navigate('/dashboard');
         } else {
             showToast(response.data.message, 'error', 3000);
         }

@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { apiContext } from '../../utils/apiContext'
 import Loading from '../../components/Loading/Loading'
 import { showToast } from '../../components/Toast/Toast'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import styles from "./spaceconfig.module.css";
 
 interface IFormData {
     spaceName: string,
@@ -29,11 +30,11 @@ const SpaceConfig: React.FC = () => {
                 Authorization: `Bearear ${token}`
             }
         });
-        if(response.data.success){
+        if (response.data.success) {
             showToast(response.data.message, 'success', 3000);
             localStorage.setItem("office_space", JSON.stringify(response.data.data));
             navigate(`/space/${response.data.data._id}`);
-        }else{
+        } else {
             showToast(response.data.message, "error", 3000);
         }
         setLoading(false);
@@ -44,10 +45,45 @@ const SpaceConfig: React.FC = () => {
             {
                 loading ? <Loading /> :
                     <>
-                        <div>
-                            <input type="text" name="spaceName" value={formData.spaceName} placeholder='Name Of Space' onChange={handleChange} />
-                            <input type="number" name='numberOfMembers' value={formData.numberOfMembers} placeholder='Team Size' onChange={handleChange} />
-                            <button onClick={handelClick}>Create Space</button>
+                        <div className={styles.spaceConfigPage}>
+                            <header className={styles.header}>
+                                <Link to="/dashboard" className={styles.backLink}>← Back to Home</Link>
+                                <h1 className={styles.title}>Configure Your Space</h1>
+                            </header>
+                            <main className={styles.main}>
+                                <form onSubmit={handelClick} className={styles.form}>
+                                    <div className={styles.formGroup}>
+                                        <label htmlFor="spaceName" className={styles.label}>Space Name</label>
+                                        <input
+                                            type="text"
+                                            id="spaceName"
+                                            value={formData.spaceName}
+                                            onChange={handleChange}
+                                            required
+                                            name='spaceName'
+                                            className={styles.input}
+                                            placeholder="Enter your space name"
+                                        />
+                                    </div>
+                                    <div className={styles.formGroup}>
+                                        <label htmlFor="spaceSize" className={styles.label}>Space Size (in sq ft)</label>
+                                        <input
+                                        name='numberOfMembers'
+                                            type="number"
+                                            id="spaceSize"
+                                            value={formData.numberOfMembers}
+                                            onChange={handleChange}
+                                            required
+                                            min="1"
+                                            className={styles.input}
+                                            placeholder="Enter space size"
+                                        />
+                                    </div>
+                                    <button type="submit" className={styles.submitButton}>
+                                        Create Space
+                                    </button>
+                                </form>
+                            </main>
                         </div>
 
                     </>
