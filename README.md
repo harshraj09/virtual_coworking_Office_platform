@@ -140,35 +140,29 @@ git push origin feature-name
 Create a Pull Request on the main repository.
 
 
-👤 About the Developer
-Name: Ashutosh Paliwal
-Role: Software Developer
-Email: ashutoshp@example.com
-LinkedIn: Ashutosh Paliwal
+# 👤 About the Developer
+# Name: Ashutosh Paliwal
+# Role: Software Developer
+# Email: ashutsohpaliwal26@gmail.com
+# LinkedIn: Ashutosh Paliwal
 
-👤 About the Developer
-Name: Ashutosh Paliwal
-Role: Software Developer
-Email: ashutoshp@example.com
-LinkedIn: Ashutosh Paliwal
+# 👤 About the Developer
+# Name: Ashutosh Paliwal
+# Role: Software Developer
+# Email: ashutoshp@example.com
+# LinkedIn: Ashutosh Paliwal
 
-👤 About the Developer
-Name: Ashutosh Paliwal
-Role: Software Developer
-Email: ashutoshp@example.com
-LinkedIn: Ashutosh Paliwal
+# 👤 About the Developer
+# Name: Ashutosh Paliwal
+# Role: Software Developer
+# Email: ashutoshp@example.com
+# LinkedIn: Ashutosh Paliwal
 
-👤 About the Developer
-Name: Ashutosh Paliwal
-Role: Software Developer
-Email: ashutoshp@example.com
-LinkedIn: Ashutosh Paliwal
-
---- ## License
-
-This project is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.
-
----
+# 👤 About the Developer
+# Name: Ashutosh Paliwal
+# Role: Software Developer
+# Email: ashutoshp@example.com
+# LinkedIn: Ashutosh Paliwal
 
 ## ⭐ Show Your Support
 

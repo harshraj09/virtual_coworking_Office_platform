@@ -1,0 +1,15 @@
+/* VideoStrip.module.css */
+.container {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-80%);
+    background-color: rgba(17, 24, 39, 0.9);
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+.grid {
+    display: flex;
+    gap: 1rem;
+}

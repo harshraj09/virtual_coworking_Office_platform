@@ -31,7 +31,7 @@ const SpaceConfig: React.FC = () => {
             }
         });
         if (response.data.success) {
-            showToast(response.data.message, 'success', 3000);
+            showToast("Space Created Successfully", 'success', 3000);
             localStorage.setItem("office_space", JSON.stringify(response.data.data));
             navigate(`/space/${response.data.data._id}`);
         } else {

@@ -1,6 +1,11 @@
 
 import { Link } from 'react-router-dom' 
 import styles from './about.module.css'
+import pranjail from '../../../images/members/Pranjali.jpg'
+import harsh from '../../../images/members/harsh.jpg'
+import mahi from '../../../images/members/Mahi.jpg'
+import ashutosh from '../../../images/members/Ashutosh.jpg'
+import createx from '../../../images/createx.mp4'
 
 export default function AboutPage() {
   return (
@@ -18,23 +23,63 @@ export default function AboutPage() {
           <div className={styles.teamMembers}>
             {/* Add team member details here */}
             <div className={styles.teamMember}>
-              <div className={styles.memberAvatar}></div>
-              <h3 className={styles.memberName}>Team Member 1</h3>
+              <div className={styles.memberAvatar}>
+                <img
+                src={ashutosh}
+                style={{
+                  width : "100%",
+                  height : "100%",
+                  objectFit : "cover",
+                  borderRadius : "50%"
+                }}
+              />
+              </div>
+              <h3 className={styles.memberName}>Ashutosh Paliwal</h3>
               <p className={styles.memberRole}>Full-stack Developer</p>
             </div>
             <div className={styles.teamMember}>
-              <div className={styles.memberAvatar}></div>
-              <h3 className={styles.memberName}>Team Member 2</h3>
+              <div className={styles.memberAvatar}>
+              <img
+                src={harsh}
+                style={{
+                  width : "100%",
+                  height : "100%",
+                  objectFit : "cover",
+                  borderRadius : "50%"
+                }}
+              />
+              </div>
+              <h3 className={styles.memberName}>Harsh Raj Singh Rathore</h3>
+              <p className={styles.memberRole}>Frontend Developer</p>
+            </div>
+            <div className={styles.teamMember}>
+              <div className={styles.memberAvatar}>
+              <img
+                src={pranjail}
+                style={{
+                  width : "100%",
+                  height : "100%",
+                  objectFit : "cover",
+                  borderRadius : "50%"
+                }}
+              />
+              </div>
+              <h3 className={styles.memberName}>Pranjali Bhatt</h3>
               <p className={styles.memberRole}>UI/UX Designer</p>
             </div>
             <div className={styles.teamMember}>
-              <div className={styles.memberAvatar}></div>
-              <h3 className={styles.memberName}>Team Member 3</h3>
-              <p className={styles.memberRole}>Backend Developer</p>
-            </div>
-            <div className={styles.teamMember}>
-              <div className={styles.memberAvatar}></div>
-              <h3 className={styles.memberName}>Team Member 4</h3>
+              <div className={styles.memberAvatar}>
+              <img
+                src={mahi}
+                style={{
+                  width : "100%",
+                  height : "100%",
+                  objectFit : "cover",
+                  borderRadius : "50%"
+                }}
+              />
+              </div>
+              <h3 className={styles.memberName}>Mahi Sharma</h3>
               <p className={styles.memberRole}>Frontend Developer</p>
             </div>
           </div>
@@ -57,13 +102,9 @@ export default function AboutPage() {
         <section className={styles.eventSection}>
           <h2 className={styles.sectionTitle}>CreateX Event</h2>
           <div className={styles.eventImageContainer}>
-            <img
-              src="/placeholder.svg?height=200&width=400"
-              alt="CreateX Event Logo"
-              width={400}
-              height={200}
-              className={styles.eventImage}
-            />
+          <video src={createx} width={"100%"} height={"100%"} loop autoPlay playsInline muted style={{
+            borderRadius : "30px"
+          }}></video>
           </div>
           <p className={styles.eventDescription}>
             We are proud participants in the CreateX event, where we have the opportunity to showcase our innovative virtual coworking solution. This event has challenged us to push the boundaries of what's possible in remote collaboration technology.

@@ -11,20 +11,8 @@ const features = [
     description: "Instant messaging with rich text formatting, file sharing, and threaded conversations. Create channels for different teams or projects, and enjoy seamless integration with other platform features.",
   },
   {
-    title: "Audio Rooms",
-    description: "Create or join audio-only rooms for quick discussions, brainstorming sessions, or background chatter. Perfect for replicating the casual conversations you'd have in a physical office.",
-  },
-  {
     title: "Virtual Office Spaces",
-    description: "Customizable 3D environments that mimic real office layouts. Move your avatar around the space, join conversations by proximity, and personalize your virtual desk.",
-  },
-  {
-    title: "Task Management",
-    description: "Built-in task boards and to-do lists to keep your team organized and productive. Assign tasks, set deadlines, and track progress all within the same platform you use for communication.",
-  },
-  {
-    title: "Document Collaboration",
-    description: "Real-time collaborative document editing, allowing multiple team members to work on the same file simultaneously. Includes version history and commenting features.",
+    description: "Customizable 2D environments that mimic real office layouts. Move your avatar around the space, join conversations by proximity, and personalize your virtual desk.",
   },
 ]
 

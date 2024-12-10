@@ -25,7 +25,7 @@ export default function MessageInput({ chatId }: MessageInputProps) {
     if(message === ""){
       return;
     }
-    socket?.emit("send_message", {userId, spaceId, message, chatId})
+    socket?.emit("send_message", {sender : user.name, time : Date.now(), spaceId, message})
     setMessage("")
   };
 

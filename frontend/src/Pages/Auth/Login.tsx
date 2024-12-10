@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { showToast } from '../../components/Toast/Toast'
 import Loading from '../../components/Loading/Loading'
 import APIService from '../../service/APIService.ts/APIService'
+import Header from '../Home/components/Header'
 
 interface IFormData {
     email: string;
@@ -49,9 +50,11 @@ const Login: React.FC = () => {
         setLoading(false);
     }
 
+
     return (
         <>
             {loading && <Loading />}
+                <Header onLoginClick={() => { navigate("/signup")}}/>
             <Box className="signup-container" width='100vw' height='100vh'>
                 <Box width='500px' height='500px' className='box'>
                     <Box width='100%' height='100px' className='box-inner'>

@@ -14,7 +14,7 @@ interface IspaceData {
 
 
 const Dashboard: React.FC = () => {
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const userData = localStorage.getItem("user");
     const user = JSON.parse(userData as string);
     const [spaces, setSpaces] = useState<IspaceData[]>([]);

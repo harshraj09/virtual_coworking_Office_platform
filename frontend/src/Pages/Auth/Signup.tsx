@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { showToast } from '../../components/Toast/Toast'
 import Loading from '../../components/Loading/Loading'
 import APIService from '../../service/APIService.ts/APIService'
+import Header from '../Home/components/Header'
 
 
 interface IFormData {
@@ -70,7 +71,8 @@ const Signup: React.FC = () => {
     return (
         <>
             {loading && <Loading />}
-            <Box className="signup-container" width='100vw' height='100vh'>
+            <Header onLoginClick={()=>{navigate("/login")}}/> 
+            <Box className="signup-container" width='100vw' height='90vh'>
                 <Box width='500px' height='fit-content' className='box'>
                     <Box width='100%' height='100px' className='box-inner'>
                         <Text variant="heading">Welcome</Text>

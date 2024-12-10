@@ -1,9 +1,7 @@
 import { Server } from "socket.io";
 import Message from "../model/Message";
-import WorkingSpace from "../model/WorkingSpace";
-import { isJsxClosingElement } from "typescript";
+import WorkingSpace from "../model/WorkingSpace"; 
 import Chat from "../model/Chat";
-import { populate } from "dotenv";
 
 class ChatInstance {
     private io: Server;
@@ -15,28 +13,11 @@ class ChatInstance {
     private socketInit() {
         this.io.on("connection", (socket) => {
             socket.on("send_message", async (data) => {
-                const { message, userId, spaceId, chatId } = data;
-                const newMessage = await this.createMessage(message as string, spaceId as string, userId as string, chatId as string);
+                const  {sender, time , spaceId, message} = data;
+                // const newMessage = await this.createMessage(message as string, spaceId as string, userId as string, chatId as string);
                 // console.log({newMessage});
-            })
-            socket.on("join_user", async ({ spaceId, userId }) => {
-                const allJoinUsers = await this.listJoinUser(spaceId as string, userId as string);
-                this.io.to(spaceId).emit("all_join_user", { allJoinUsers });
-            });
-            socket.on("create_chat", async (data) => {
-                const { userId, anotherUserId, spaceId } = data;
-                const newChat = await this.createChat(userId, anotherUserId, spaceId);
-                this.io.to(spaceId).emit("user_chat", { newChat });
-            })
-            socket.on("load_message", async ({ spaceId, chatId }) => {
-                const allMessage = await this.handelAllMessage(chatId);
-                console.log({allMessage});
-                this.io.to(spaceId).emit("all_message_array", { allMessage });
-            })
-            socket.on("all_chats", async({spaceId , userId})=>{
-                const allChats = await this.userChats(userId, spaceId);
-                // console.log({allChats});
-                this.io.to(spaceId).emit("all_user_chats", { allChats });
+                console.log({data});
+                this.io.to(spaceId).emit("new_message", {sender , time, message});
             })
         })
     }

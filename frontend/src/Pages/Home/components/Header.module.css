@@ -21,6 +21,8 @@
   display: flex;
   list-style-type: none;
   gap: 1rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .navLink {
