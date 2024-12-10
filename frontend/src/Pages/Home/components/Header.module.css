@@ -1,0 +1,39 @@
+.header {
+  padding: 1rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #E74C3C;
+}
+
+.navList {
+  display: flex;
+  list-style-type: none;
+  gap: 1rem;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.loginButton {
+  background-color: #E74C3C;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+

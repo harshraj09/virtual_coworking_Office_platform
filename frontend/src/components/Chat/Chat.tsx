@@ -62,21 +62,19 @@ export default function Chat() {
     ]);
   };
 
-  const handleNewChat = useCallback(() => {
-    // Implement new chat functionality
-    // Handle Join User Section
+  const handleNewChat = () => {
     socket?.emit("all_chats", {spaceId, userId});
-  }, [socket]);
+  };
 
-  const handleSendMessage = useCallback((text: string) => {
-    const newMessage = {
-      userId : userId,
-      messages : text,
-      spaceId : spaceId,
-      chatId : chatId
-    };
+  // const handleSendMessage = useCallback((text: string) => {
+  //   const newMessage = {
+  //     userId : userId,
+  //     messages : text,
+  //     spaceId : spaceId,
+  //     chatId : chatId
+  //   };
 
-  },[socket]);
+  // },[socket]);
 
   const handleGoBack = () => {
     if (chatState === 'active') {
@@ -112,33 +110,32 @@ export default function Chat() {
   }, [chatId])
 
 
-  const handleNewMessage = useCallback(async() => {
-    console.log("New Message");
-  },[socket])
+  const handleNewMessage = useCallback(({ allMessage }:any) => {
+    console.log("New Message", allMessage);
+    
+  },[socket]);
 
   const handleAllUserChat = useCallback(({ allChats } : any)=>{
-    console.log({allChats});
     setChatPreviews(allChats);
-  }, [chatPreviews])
+  }, [])
 
   useEffect(()=>{
     handleStartChat();
     handleNewChat();
-  }, [])
+  }, [socket])
+
   
   useEffect(()=>{
-    socket?.on("all_join_user", handelAllJoinMembers);
-    socket?.on("all_user_chats", (data)=>{
+    socket?.on("all_message_array", (data)=>{
       console.log(data);
     });
+    socket?.on("all_join_user", handelAllJoinMembers);
+    socket?.on("all_user_chats", handleAllUserChat);
     socket?.on("user_chat", handelChat);
     socket?.on("show_all_message", handleNewMessage);
-    socket?.on("all_messages", (data)=>{
-      console.log({data});
-    })
     return(()=>{
       socket?.off("all_user_chats", handleAllUserChat);
-      socket?.on("show_all_message", handleNewMessage);
+      socket?.off("show_all_message", handleNewMessage);
       socket?.off("user_chat", handelChat);
       socket?.off("all_join_user", handelAllJoinMembers);
     })

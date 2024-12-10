@@ -17,6 +17,7 @@ class ChatInstance {
             socket.on("send_message", async (data) => {
                 const { message, userId, spaceId, chatId } = data;
                 const newMessage = await this.createMessage(message as string, spaceId as string, userId as string, chatId as string);
+                // console.log({newMessage});
             })
             socket.on("join_user", async ({ spaceId, userId }) => {
                 const allJoinUsers = await this.listJoinUser(spaceId as string, userId as string);
@@ -29,11 +30,12 @@ class ChatInstance {
             })
             socket.on("load_message", async ({ spaceId, chatId }) => {
                 const allMessage = await this.handelAllMessage(chatId);
-                this.io.to(spaceId).emit("all_messages", { allMessage });
+                console.log({allMessage});
+                this.io.to(spaceId).emit("all_message_array", { allMessage });
             })
             socket.on("all_chats", async({spaceId , userId})=>{
                 const allChats = await this.userChats(userId, spaceId);
-                console.log({allChats});
+                // console.log({allChats});
                 this.io.to(spaceId).emit("all_user_chats", { allChats });
             })
         })
