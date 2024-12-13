@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Box from '../../components/assets/Box/Box';
 import Text from '../../components/assets/Font/Text';
 import APIService from '../../service/APIService.ts/APIService';
+import Header from '../Home/components/Header';
 
 interface IspaceData {
     spaceName: string,
@@ -70,7 +71,7 @@ const Dashboard: React.FC = () => {
             {
                 loading ? <Loading /> :
                     <>
-                        <DashHeader name={user?.name} />
+                        <DashHeader name={user?.name} email={user.email}/>
                         <Box className='show-space' height='fit-content'>
                             {
                                 spaces.map((ele) => (

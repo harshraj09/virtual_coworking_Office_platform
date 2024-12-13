@@ -7,7 +7,7 @@ import characterImage from '../../images/image01.png'
 import { Background } from "./Background";
 import BackgroundImage from '../../images/background.png';
 import Peer from "../../service/Peer";
-import { showToast } from "../Toast/Toast";
+import { GameMessage } from "./GameMessage";
 
 interface User {
     _id: number;
@@ -91,9 +91,7 @@ const Game: React.FC = () => {
         if (collisions.length === 0) {
             setCall(false);
         } else {
-            showToast("Press X Twice To On Remote Video", "success", 1000);
             setCall(true);
-            console.log("collision");
         }
         // console.log(collisions);
         return collisions;
@@ -176,7 +174,9 @@ const Game: React.FC = () => {
         handleCollisions();
     };
 
-
+    const hanldeCloseMessage = () => {
+        setCall(false);
+    }
 
 
     const drawUsers = (ctx: CanvasRenderingContext2D) => {
@@ -266,6 +266,11 @@ const Game: React.FC = () => {
                 }}
             >
             </canvas>
+            <GameMessage 
+                isVisible={call}
+                message="Press X Twice to One the Remote Stream"
+                onClose={hanldeCloseMessage}
+            />
         </>
     );
 

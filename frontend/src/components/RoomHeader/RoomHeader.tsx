@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./roomheader.css"
 import logo from '../../images/logo.png'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import DropdownMenu from '../DropdownMenu/DropdownMenu'
 import { Droplet, Menu, MenuIcon } from 'lucide-react'
 import { showToast } from '../Toast/Toast'
@@ -45,7 +45,7 @@ const RoomHeader:React.FC = () => {
             <button className='copy_link_btn' onClick={copyUrl}><i className="fa-solid fa-link"></i></button>
         </div>
         <div>
-            <img src={logo} alt="" width={"180px"}/>
+            <Link to={"/"}><img src={logo} alt="" width={"180px"}/></Link>
         </div>
         <div>
             <DropdownMenu label={<Menu/>} items={dropdownItems}/>
