@@ -12,7 +12,7 @@ const createWorkingSpace = async (req: Request, res: Response): Promise<any> => 
     }
 
     try {
-        const decoded = jwt.verify(token as string, process.env.JWT_SECRET as jwt.Secret) as JwtPayload;
+        const decoded = jwt.verify(token as string, process.env.JWT_SECRET as string) as JwtPayload;
         if (!decoded) {
             return res.json({ success: false, message: "Invalid Token" });
         }
@@ -24,7 +24,8 @@ const createWorkingSpace = async (req: Request, res: Response): Promise<any> => 
         if (!spaceName) {
             return res.json({ success: false, message: "Space name is required" });
         }
-        const checkSpace = await WorkingSpace.findOne({ spaceName : spaceName})
+        const checkSpace = await WorkingSpace.findOne({ spaceName : spaceName, admin : userId});
+        console.log({checkSpace});
         if(checkSpace) {
             return res.json({
                 success : false, 

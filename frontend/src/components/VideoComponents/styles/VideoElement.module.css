@@ -47,6 +47,16 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  .my_video {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   
   .username {
     color: white;

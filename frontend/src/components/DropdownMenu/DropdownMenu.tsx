@@ -1,6 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { useState, useRef, useEffect, ReactNode } from 'react';
 import './DropdownMenu.css';
 
 interface DropdownMenuItem {
@@ -9,10 +7,13 @@ interface DropdownMenuItem {
 }
 
 interface DropdownMenuProps {
-  items: DropdownMenuItem[];
+  label: string | ReactNode
+  items: DropdownMenuItem[],
+  name? : string,
+  email? : string
 }
 
-export default function DropdownMenu({ items }: DropdownMenuProps) {
+export default function DropdownMenu({ items, label }: DropdownMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +33,7 @@ export default function DropdownMenu({ items }: DropdownMenuProps) {
   return (
     <div className="dropdown" ref={dropdownRef}>
       <button className="icon-button" onClick={() => setIsOpen(!isOpen)}>
-        <FontAwesomeIcon icon={faEllipsisV} />
+        {label}
       </button>
       {isOpen && (
         <ul className="dropdown-menu">

@@ -20,7 +20,7 @@ const protect = asyncHandler(async (req: Request, res: Response, next: NextFunct
         })
     }
     try{
-        const decodeData = jwt.verify(token as string, process.env.JWT_SECRET as jwt.Secret) as JwtPayload;
+        const decodeData = jwt.verify(token as string, process.env.JWT_SECRET as string) as JwtPayload;
         const user = await User.findOne({ _id: decodeData?._id });
         if (!user) {
             return res.status(404).json({

@@ -65,6 +65,11 @@
   dependencies:
     levn "^0.4.1"
 
+"@excalidraw/excalidraw@^0.17.6":
+  version "0.17.6"
+  resolved "https://registry.npmjs.org/@excalidraw/excalidraw/-/excalidraw-0.17.6.tgz"
+  integrity sha512-fyCl+zG/Z5yhHDh5Fq2ZGmphcrALmuOdtITm8gN4d8w4ntnaopTXcTfnAAaU3VleDC6LhTkoLOTG6P5kgREiIg==
+
 "@fortawesome/fontawesome-common-types@6.7.1":
   version "6.7.1"
   resolved "https://registry.npmjs.org/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.7.1.tgz"
@@ -1008,7 +1013,7 @@ queue-microtask@^1.2.2:
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-react-dom@^18.0.0, react-dom@^18.3.1, react-dom@>=16.8:
+"react-dom@^17.0.2 || ^18.2.0", react-dom@^18.0.0, react-dom@^18.3.1, react-dom@>=16.8:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
   integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
@@ -1052,7 +1057,7 @@ react-router@6.28.0:
   dependencies:
     "@remix-run/router" "1.21.0"
 
-"react@^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc", react@^18.0.0, react@^18.3.1, react@>=16.3, react@>=16.6.0, react@>=16.8:
+"react@^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc", "react@^17.0.2 || ^18.2.0", react@^18.0.0, react@^18.3.1, react@>=16.3, react@>=16.6.0, react@>=16.8:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==

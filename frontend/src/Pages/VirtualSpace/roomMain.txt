@@ -94,7 +94,7 @@ const Room = () => {
   const handleAnswer = useCallback(
     async ({ answer }: any) => {
       try {
-        await Peer.setLocalDescription(answer);
+        await Peer.setRemoteDescription(answer);
       } catch (err) {
         console.error('Error handling answer:', err);
       }
@@ -164,6 +164,8 @@ const Room = () => {
       ) : (
         <>
           {myStream && <VideoStrip participants={participants} />}
+          <button onClick={() => setMic(!mic)}>Toggle Mic</button>
+          <button onClick={() => setCamera(!camera)}>Toggle Camera</button>
           <RoomHeader />
           <div className="main-content">
             <div className="empty-space">

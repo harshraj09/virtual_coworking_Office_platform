@@ -17,8 +17,8 @@ export default function MessageInput({ chatId }: MessageInputProps) {
   const userId:string = user._id;
   const {spaceId} = useParams();
   const { socket } = useSocket() || {socket : null};
-
-  console.log({userId, spaceId, chatId})
+  const chatID = chatId;
+  // console.log({userId, spaceId, chatId})
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

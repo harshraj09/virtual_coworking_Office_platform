@@ -12,7 +12,6 @@ interface IspaceData {
     _id: string
 }
 
-
 const Dashboard: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const userData = localStorage.getItem("user");
@@ -72,7 +71,7 @@ const Dashboard: React.FC = () => {
                 loading ? <Loading /> :
                     <>
                         <DashHeader name={user?.name} />
-                        <Box className='show-space' width='100%' height='fit-content'>
+                        <Box className='show-space' height='fit-content'>
                             {
                                 spaces.map((ele) => (
                                     <Link to={`/space/${ele._id}`} style={{ textDecoration: "none" }} key={ele._id}>

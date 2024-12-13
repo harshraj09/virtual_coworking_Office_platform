@@ -17,7 +17,7 @@ class ChatInstance {
                 // const newMessage = await this.createMessage(message as string, spaceId as string, userId as string, chatId as string);
                 // console.log({newMessage});
                 console.log({data});
-                this.io.to(spaceId).emit("new_message", {sender , time, message});
+                this.io.to(spaceId).emit("new_message", {sender ,time , message});
             })
         })
     }

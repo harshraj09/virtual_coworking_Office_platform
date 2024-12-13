@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import "./DropDown.css"
 
 interface IDropDown {
     dataSet : [{
         name : string
     }],
-    title : string
+    title : string | ReactNode
 }
 
 const DropDown: React.FC<IDropDown> = ({dataSet, title}) => {

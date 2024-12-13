@@ -56,8 +56,15 @@ export default function Chat() {
   ];
 
   useEffect(()=>{
-    socket?.on("new_message", (data)=>{
-      setMessages((prev)=> [...prev, data]);
+    socket?.on("new_message", ({sender ,time , message})=>{
+      // console.log({data});
+      setMessages((prev)=> [...prev, 
+        {
+          id : time,
+          message : message,
+          sender : sender
+        }
+      ]);
     })
     return(()=>{
       socket?.off("new_message");
@@ -80,7 +87,7 @@ export default function Chat() {
           <button className="icon-button" onClick={()=>{}}>
             <FontAwesomeIcon icon={faExpand} />
           </button> */}
-          <DropdownMenu items={dropdownItems} />
+          {/* <DropdownMenu  items={dropdownItems} /> */}
         </div>
       </div>
       {chatState === 'Group Chat' && (
@@ -93,7 +100,7 @@ export default function Chat() {
                 </div>
                 <div className="message-content">
                   <div className="message-text">{message.message}</div>
-                  {/* <div className="message-time">{message.time}</div> */}
+                  <div className="message-time">{message.sender}</div>
                 </div>
               </div>
             ))}

@@ -2,6 +2,30 @@
     position: relative;
   }
   
+  .user_details{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_details:hover{
+  background-color: var(--secondary-bg);
+}
+
+.user_details_name {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+}
+
+.user_details_email{
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.548);
+}
+  
   .dropdown-menu {
     position: absolute;
     right: 0;

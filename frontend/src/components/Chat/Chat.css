@@ -76,6 +76,8 @@
   }
   
   .icon-button {
+    width: 40px;
+    height: 40px;
     background: none;
     border: none;
     color: var(--text-color);
@@ -85,6 +87,7 @@
   }
   
   .icon-button:hover {
+    background-color: var(--primary-bg);  
     color: var(--hover-color);
   }
   

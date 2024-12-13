@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import './index.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './Pages/Auth/Login'
@@ -12,8 +12,10 @@ import Room from './Pages/VirtualSpace/Room'
 import LandingPage from './Pages/Home/page'
 import FeaturePage from './Pages/Home/features/page'
 import AboutPage from './Pages/Home/components/AboutUs'
+import Board from './components/Game/Board'
 
 const App: React.FC = () => {
+
 
   return (
     <>
@@ -30,6 +32,8 @@ const App: React.FC = () => {
               <Route path="/space-config" element={<SpaceConfig />} />
               <Route path="/space/:spaceId" element={<VirtualSpace />} />
               <Route path="/space/:spaceId/room" element={<Room />} />
+              {/* <Route path="/board" element={<Board />} /> */}
+
             </Routes>
           </SocketProvider>
         </Router>
