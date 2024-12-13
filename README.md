@@ -15,10 +15,10 @@ The **Virtual Coworking Office Platform** is an innovative project developed by 
 
 ## 🛠️ Tech Stack
 
-| **Frontend**       | **Backend**        | **Database**    | **Real-Time**      |  |
-|---------------------|--------------------|-----------------|--------------------|-------------------------|
-| ReactJS + Vite     | Express.js         | MongoDB         | Socket.IO          |                   |
-| TypeScript         | Node.js            |                 | WebSockets         |                         |
+| **Frontend**       | **Backend**        | **Database**    | **Real-Time**      |
+|---------------------|--------------------|-----------------|-------------------|
+| ReactJS + Vite     | Express.js         | MongoDB         | Socket.IO          |
+| TypeScript         | Node.js            |                 | WebSockets         |
 
 ---
 
@@ -139,30 +139,29 @@ Copy code
 git push origin feature-name
 Create a Pull Request on the main repository.
 
+👤 About the Developer
+Name: Ashutosh Paliwal
+Role: Full Stack Developer
+Email: ashutsohpaliwal26@gmail.com
+LinkedIn: Ashutosh Paliwal
 
-# 👤 About the Developer
-# Name: Ashutosh Paliwal
-# Role: Software Developer
-# Email: ashutsohpaliwal26@gmail.com
-# LinkedIn: Ashutosh Paliwal
+👤 About the Developer
+Name: Harsh Raj Singh Rathore
+Role: Frontend Developer
+Email: raj.harsh0123456@gmail.com
+LinkedIn: Harsh Raj
 
-# 👤 About the Developer
-# Name: Ashutosh Paliwal
-# Role: Software Developer
-# Email: ashutoshp@example.com
-# LinkedIn: Ashutosh Paliwal
+👤 About the Developer
+Name: Pranjali Bhatt
+Role: UI/UX Designer
+Email: pranjalibhatt09@gmail.com
+LinkedIn: Pranjali Bhatt
 
-# 👤 About the Developer
-# Name: Ashutosh Paliwal
-# Role: Software Developer
-# Email: ashutoshp@example.com
-# LinkedIn: Ashutosh Paliwal
-
-# 👤 About the Developer
-# Name: Ashutosh Paliwal
-# Role: Software Developer
-# Email: ashutoshp@example.com
-# LinkedIn: Ashutosh Paliwal
+👤 About the Developer
+Name: Mahi Sharma
+Role: Frontend Developer
+Email: mahisharma31109@gmail.com
+LinkedIn: Mahi Sharma
 
 ## ⭐ Show Your Support
 
