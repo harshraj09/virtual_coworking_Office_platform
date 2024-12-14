@@ -10,6 +10,8 @@ import { showToast } from '../../components/Toast/Toast';
 import { VideoStrip } from '../../components/VideoComponents/VideoStrip';
 import { useSocket } from '../../context/SocketContext/SocketContext';
 import Peer from '../../service/Peer';
+import JoinUser from '../../components/JoinUser/JoinUser';
+import ChatPreview from '../../components/UserChats/UserChats';
 
 interface TypesParticipant {
   id: string;
@@ -19,7 +21,10 @@ interface TypesParticipant {
   isVideoOff: boolean;
 }
 
+type ComponentState = "Join_User" | "Chat_State" | "Active_Chat"
+
 const Room = () => {
+  const [componentState, setComponentState] = useState<ComponentState>("Join_User");
   const [camera, setCamera] = useState(false);
   const [mic, setMic] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -29,6 +34,10 @@ const Room = () => {
   const [participants, setParticipants] = useState<TypesParticipant[]>([]);
   const { socket } = useSocket() || { socket: null };
   const { spaceId } = useParams();
+
+  const handelState = (state:ComponentState) => {
+    setComponentState(state);
+  }
 
   const startMyStream = useCallback(async () => {
     try {
@@ -164,13 +173,15 @@ const Room = () => {
       ) : (
         <>
           {myStream && <VideoStrip participants={participants} />}
-          <RoomHeader />
+          <RoomHeader handlState={handelState} />
           <div className="main-content">
             <div className="empty-space">
               <Game />
             </div>
             <div className="chat-sidebar">
-              <Chat />
+              {componentState === "Chat_State" && <ChatPreview />}
+              {componentState === "Join_User" && <JoinUser />}
+              {componentState === "Active_Chat" && <Chat />}
             </div>
           </div>
         </>

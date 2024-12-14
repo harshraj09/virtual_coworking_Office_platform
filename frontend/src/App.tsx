@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import './index.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './Pages/Auth/Login'
@@ -12,32 +12,35 @@ import Room from './Pages/VirtualSpace/Room'
 import LandingPage from './Pages/Home/page'
 import FeaturePage from './Pages/Home/features/page'
 import AboutPage from './Pages/Home/components/AboutUs'
-import Board from './components/Game/Board'
+import GlobalState from './context/SocketContext/global/globalstate/GlobalState'
+import TaskManager from './components/TaskManager/TaskManager'
 
 const App: React.FC = () => {
 
 
   return (
     <>
-    <div>
+      <div>
         <Router future={{ v7_startTransition: true }}>
           <SocketProvider>
-            <Routes>
-              <Route path='/features' element={<FeaturePage/>}/>
-              <Route path='/about' element={<AboutPage/>}/>
-              <Route path='/' element={<LandingPage/>}/>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/space-config" element={<SpaceConfig />} />
-              <Route path="/space/:spaceId" element={<VirtualSpace />} />
-              <Route path="/space/:spaceId/room" element={<Room />} />
-              {/* <Route path="/board" element={<Board />} /> */}
-
-            </Routes>
+            <GlobalState>
+              <Routes>
+                <Route path='/features' element={<FeaturePage />} />
+                <Route path='/about' element={<AboutPage />} />
+                <Route path='/' element={<LandingPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/space-config" element={<SpaceConfig />} />
+                <Route path="/space/:spaceId" element={<VirtualSpace />} />
+                <Route path="/space/:spaceId/room" element={<Room />} />
+                {/* <Route path="/board" element={<Board />} /> */}
+                <Route path='/space/:spaceId/tasks' element={<TaskManager/>}/>
+              </Routes>
+            </GlobalState>
           </SocketProvider>
         </Router>
-    </div>
+      </div>
     </>
   )
 }

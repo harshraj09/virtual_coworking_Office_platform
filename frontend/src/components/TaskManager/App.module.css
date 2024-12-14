@@ -1,0 +1,37 @@
+:root {
+  --primary-bg: #2c3e50;
+  --secondary-bg: #34495e;
+  --text-color: #ecf0f1;
+  --border-color: #455a64;
+  --input-bg: #2c3e50;
+  --hover-color: #3498db;
+  --button-bg: #e74c3c;
+  --button-hover: #c0392b;
+}
+
+.app {
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.main {
+  padding: 2rem;
+}
+
+.addTaskButton {
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 1rem;
+}
+
+.addTaskButton:hover {
+  background-color: var(--button-hover);
+}
+

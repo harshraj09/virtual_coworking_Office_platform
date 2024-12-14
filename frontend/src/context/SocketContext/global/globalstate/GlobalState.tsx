@@ -1,32 +1,34 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useState } from "react";
 
-interface IGloblaProps {
-    children : ReactNode
+interface IGlobalProps {
+  children: ReactNode;
 }
 
 interface IGlobalStates {
-    meetingView : boolean,
-    setMeetingView : React.Dispatch<boolean>;
+  joinMembers: number;
+  setJoinMembers: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const GlobalContext = createContext<IGlobalStates | null>(null);
+// Default context value
+const defaultValue: IGlobalStates = {
+  joinMembers: 0,
+  setJoinMembers: () => {
+    throw new Error("setJoinMembers is not defined. Make sure you're using GlobalContext.Provider.");
+  },
+};
 
-export const useGlobalState = () => {
-    const context = useContext(GlobalContext);
-    if(!GlobalContext){
-        throw new Error("No Global State Present");
-    }
-    return context;
-}
+// Create Context
+export const GlobalContext = createContext<IGlobalStates>(defaultValue);
 
-const GlobalState:React.FC<IGloblaProps> = ({children}) => {
-    const [meetingView , setMeetingView ] = useState<boolean>(false);
+// Provider Component
+const GlobalState: React.FC<IGlobalProps> = ({ children }) => {
+  const [joinMembers, setJoinMembers] = useState<number>(0);
     
   return (
-    <GlobalContext.Provider value={{meetingView , setMeetingView}}>
-        {children}
-    </GlobalContext.Provider>  
-  )
-}
+    <GlobalContext.Provider value={{ joinMembers, setJoinMembers }}>
+      {children}
+    </GlobalContext.Provider>
+  );
+};
 
-export default GlobalState
+export default GlobalState;

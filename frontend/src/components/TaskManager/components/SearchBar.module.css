@@ -1,0 +1,15 @@
+.searchBar {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 400px;
+}
+
+.searchBar input {
+  flex-grow: 1;
+}
+
+.searchBar button {
+  padding: 0.5rem;
+  size : 1rem
+}
+

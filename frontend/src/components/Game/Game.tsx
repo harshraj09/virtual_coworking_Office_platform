@@ -83,7 +83,7 @@ const Game: React.FC = () => {
                     //     return;
                     // }
 
-                }else{
+                } else {
                     setCollisions([]);
                 }
             }
@@ -103,8 +103,8 @@ const Game: React.FC = () => {
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-        if(call){
-            if(e.key === "x"){
+        if (call) {
+            if (e.key === "x") {
                 // alert("Calling")
                 callUser();
             }
@@ -266,7 +266,7 @@ const Game: React.FC = () => {
                 }}
             >
             </canvas>
-            <GameMessage 
+            <GameMessage
                 isVisible={call}
                 message="Press X Twice to One the Remote Stream"
                 onClose={hanldeCloseMessage}

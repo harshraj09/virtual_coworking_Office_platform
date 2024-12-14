@@ -1,13 +1,12 @@
 import { Excalidraw } from '@excalidraw/excalidraw'
-import React from 'react'
 
-const Board:React.FC = () => {
+const Board = () => {
     return (
         <div>
             <>
                 <h1 style={{ textAlign: "center" }}>Excalidraw Example</h1>
                 <div style={{ height: "500px" }}>
-                    <Excalidraw />
+                    <Excalidraw/>
                 </div>
             </>
         </div>

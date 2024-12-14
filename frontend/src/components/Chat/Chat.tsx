@@ -1,8 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSync, faExpand, faArrowLeft, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
 import './Chat.css';
-import DropdownMenu from '../DropdownMenu/DropdownMenu';
 // import EmptyChatState from '../EmptyChatState/EmptyChatState';
 // import ChatPreview from '../ChatPreview/ChatPreview';
 import MessageInput from '../MessageInput/MessageInput';
@@ -38,22 +35,6 @@ export default function Chat() {
   //   };
 
   // },[socket]);
-
-
-  const dropdownItems = [
-    {
-      label: 'Settings',
-      onClick: () => console.log('Settings clicked')
-    },
-    {
-      label: 'Help',
-      onClick: () => console.log('Help clicked')
-    },
-    {
-      label: 'Logout',
-      onClick: () => console.log('Logout clicked')
-    }
-  ];
 
   useEffect(()=>{
     socket?.on("new_message", ({sender ,time , message})=>{

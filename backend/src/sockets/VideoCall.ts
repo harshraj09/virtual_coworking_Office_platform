@@ -12,14 +12,18 @@ class VideoInstance {
     private socketInit() {
         this.io.on("connection", (socket) => {
             console.log(`User connected: ${socket.id}`);
-            socket.on("user_call", ({ user1, user2, spaceId, offer })=>{
-                const remoteId = user2._id;
+            socket.on("user_call", ({ userName, userId, spaceId }) => {
                 socket.join(spaceId)
-                this.io.to(spaceId).emit("user_calling", {remoteId , offer, spaceId})
+                this.io.to(spaceId).emit("user_calling", userName, userId);
             });
-            socket?.on("send_answer", ({remoteId, spaceId, answer})=>{
-                this.io.to(spaceId).emit("send_final_answer", {remoteId, answer});
+            socket?.on("send_answer", ({ userName, spaceId, userId }) => {
+                console.log({ userName, spaceId, userId });
+                this.io.to(spaceId).emit("send_final_answer", { userName, userId });
             });
+
+            socket.on('get_stream', (data) => {
+                console.log({ data });
+            })
         });
     }
 }

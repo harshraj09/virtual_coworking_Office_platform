@@ -9,6 +9,7 @@ import { Server } from 'socket.io'
 import SocketInstance from "./sockets";
 import VideoInstance from "./sockets/VideoCall";
 import ChatInstance from "./sockets/Chat";
+import ChatRoutes from "./routes/Chat";
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", authRoutes);
 app.use("/api", WorkSpace);
+app.use("/api", ChatRoutes);
 
 new SocketInstance(io);
 new VideoInstance(io);

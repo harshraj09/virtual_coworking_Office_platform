@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import "./roomheader.css"
 import logo from '../../images/logo.png'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import DropdownMenu from '../DropdownMenu/DropdownMenu'
-import { Droplet, Menu, MenuIcon } from 'lucide-react'
+import { BookmarkCheck, Menu, MessageCircle, User } from 'lucide-react'
 import { showToast } from '../Toast/Toast'
+import { GlobalContext } from '../../context/SocketContext/global/globalstate/GlobalState'
 
-const RoomHeader:React.FC = () => {
+type ComponentState = "Join_User" | "Chat_State" | "Active_Chat"
+
+
+interface RoomHeaderProps {
+  handlState : (state:ComponentState) => void
+}
+
+const RoomHeader:React.FC<RoomHeaderProps> = ({handlState}) => {
   const navigate = useNavigate();
   const {spaceId} = useParams();
-  
+  const {joinMembers} = useContext(GlobalContext)
   const dropdownItems = [
     {
       label: 'Leave Space',
@@ -44,10 +52,17 @@ const RoomHeader:React.FC = () => {
         <div>
             <button className='copy_link_btn' onClick={copyUrl}><i className="fa-solid fa-link"></i></button>
         </div>
-        <div>
+        <div style={{
+          width : "100%",
+          display : "flex",
+          justifyContent : "flex-end"
+        }}>
             <Link to={"/"}><img src={logo} alt="" width={"180px"}/></Link>
         </div>
-        <div>
+        <div className='back_ele'>
+            <button className='copy_link_btn' onClick={() => {navigate(`/space/${spaceId}/tasks`)}}><BookmarkCheck /></button>
+            <button className='copy_link_btn' onClick={() => handlState('Chat_State')}><MessageCircle /></button>
+            <button className='copy_link_btn' onClick={() => handlState('Join_User')}><p className='smalles_state'>{joinMembers}</p><User/></button>
             <DropdownMenu label={<Menu/>} items={dropdownItems}/>
         </div>
     </div>
