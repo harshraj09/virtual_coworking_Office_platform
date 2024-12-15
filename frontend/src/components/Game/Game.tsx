@@ -8,6 +8,8 @@ import { Background } from "./Background";
 import BackgroundImage from '../../images/background.png';
 import Peer from "../../service/Peer";
 import { GameMessage } from "./GameMessage";
+import MultipleVideoCards from "../VideoComponents/VideosOfMy";
+import { composeEventHandlers } from "@excalidraw/excalidraw/types/utils";
 
 interface User {
     _id: number;
@@ -26,9 +28,10 @@ const Game: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [users, setUsers] = useState<User[]>([]);
     const { spaceId } = useParams<{ spaceId: string }>();
-    const [call, setCall] = useState<boolean>(false);
+    const [call, setCall] = useState<number>(1);
     const [collisions, setCollisions] = useState<{ user1: User; user2: User }[]>([]);
     const userToControl = user._id;
+    const [myStream, setMyStream] = useState<MediaStream | null>(null);
 
     const checkCollision = (user1: User, user2: User): boolean => {
         const size = 100; // Adjust this size based on your character's dimensions
@@ -89,9 +92,9 @@ const Game: React.FC = () => {
             }
         }
         if (collisions.length === 0) {
-            setCall(false);
+            setCall(1);
         } else {
-            setCall(true);
+            setCall(2);
         }
         // console.log(collisions);
         return collisions;
@@ -174,9 +177,9 @@ const Game: React.FC = () => {
         handleCollisions();
     };
 
-    const hanldeCloseMessage = () => {
-        setCall(false);
-    }
+    // const hanldeCloseMessage = () => {
+    //     setCall();
+    // }
 
 
     const drawUsers = (ctx: CanvasRenderingContext2D) => {
@@ -212,6 +215,25 @@ const Game: React.FC = () => {
         },
         [user]
     );
+
+    useEffect(() => {
+        async function getMedia() {
+          try {
+            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            setMyStream(mediaStream)
+          } catch (err) {
+            console.error("Error accessing media devices:", err)
+          }
+        }
+    
+        getMedia()
+    
+        return () => {
+          if (myStream) {
+            myStream.getTracks().forEach(track => track.stop())
+          }
+        }
+      }, [])
 
     useEffect(() => {
         socket?.emit("join:request", { userId: user._id, spaceId });
@@ -257,6 +279,7 @@ const Game: React.FC = () => {
     return (
         <>
             {/* {call && <button onClick={callUser}>Call</button>} */}
+            {/* {myStream && <MultipleVideoCards stream={myStream} numberOfInstances={call} />} */}
             <canvas
                 ref={canvasRef}
                 width={1000}
@@ -266,11 +289,11 @@ const Game: React.FC = () => {
                 }}
             >
             </canvas>
-            <GameMessage
+            {/* <GameMessage
                 isVisible={call}
                 message="Press X Twice to One the Remote Stream"
                 onClose={hanldeCloseMessage}
-            />
+            /> */}
         </>
     );
 

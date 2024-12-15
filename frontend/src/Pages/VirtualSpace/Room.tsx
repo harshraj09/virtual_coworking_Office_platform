@@ -25,7 +25,7 @@ type ComponentState = "Join_User" | "Chat_State" | "Active_Chat"
 
 const Room = () => {
   const [componentState, setComponentState] = useState<ComponentState>("Join_User");
-  const [camera, setCamera] = useState(false);
+  const [camera, setCamera] = useState(true);
   const [mic, setMic] = useState(true);
   const [loading, setLoading] = useState(true);
   const [myStream, setMyStream] = useState<MediaStream | null>(null);
@@ -51,6 +51,13 @@ const Room = () => {
         {
           id: user._id,
           username: user.name,
+          stream,
+          isMuted: mic,
+          isVideoOff: camera,
+        },
+        {
+          id: user._id,
+          username: "Harsh",
           stream,
           isMuted: mic,
           isVideoOff: camera,

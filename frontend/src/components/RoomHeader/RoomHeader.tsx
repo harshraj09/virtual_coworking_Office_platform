@@ -61,7 +61,7 @@ const RoomHeader:React.FC<RoomHeaderProps> = ({handlState}) => {
         </div>
         <div className='back_ele'>
             <button className='copy_link_btn' onClick={() => {navigate(`/space/${spaceId}/tasks`)}}><BookmarkCheck /></button>
-            <button className='copy_link_btn' onClick={() => handlState('Chat_State')}><MessageCircle /></button>
+            <button className='copy_link_btn' onClick={() => handlState('Active_Chat')}><MessageCircle /></button>
             <button className='copy_link_btn' onClick={() => handlState('Join_User')}><p className='smalles_state'>{joinMembers}</p><User/></button>
             <DropdownMenu label={<Menu/>} items={dropdownItems}/>
         </div>
