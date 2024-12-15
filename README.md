@@ -48,7 +48,7 @@ Ensure the following are installed on your system:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/virtual-office.git
+git clone https://github.com/harshraj09/virtual-office.git
 cd virtual-office
 Install Dependencies
 Server Dependencies:
